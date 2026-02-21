@@ -25,6 +25,8 @@ public sealed class JsonProtocolSerializer : IProtocolSerializer
 
     public T DeserializePayload<T>(HelmzMessage message)
     {
+        ArgumentNullException.ThrowIfNull(message);
+
         if (message.Payload is JsonElement element)
             return element.Deserialize<T>(Options)
                 ?? throw new JsonException($"Failed to deserialize payload as {typeof(T).Name}.");
