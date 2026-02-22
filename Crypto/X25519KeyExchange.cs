@@ -27,7 +27,7 @@ public sealed class X25519KeyExchange : IKeyExchange
     public byte[] DeriveSharedKey(byte[] ourPrivateKey, byte[] theirPublicKey)
     {
         using Key ourKey = Key.Import(Algorithm, ourPrivateKey, KeyBlobFormat.RawPrivateKey);
-        NSec.Cryptography.PublicKey theirKey = NSec.Cryptography.PublicKey.Import(Algorithm, theirPublicKey, KeyBlobFormat.RawPublicKey);
+        PublicKey theirKey = PublicKey.Import(Algorithm, theirPublicKey, KeyBlobFormat.RawPublicKey);
 
         using SharedSecret sharedSecret = Algorithm.Agree(ourKey, theirKey)
             ?? throw new CryptographicException("X25519 key agreement failed.");
